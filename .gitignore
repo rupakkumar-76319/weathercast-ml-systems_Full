@@ -1,0 +1,36 @@
+
+---
+
+# 🚫 `.gitignore`
+
+```gitignore
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+dl_env/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files (DO NOT PUSH)
+data/raw/
+data/processed/
+
+# Models (optional: remove if you want to upload models)
+# models/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
