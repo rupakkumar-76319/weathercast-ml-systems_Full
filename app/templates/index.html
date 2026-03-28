@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background 0.6s;
+        }
+
+        /* 🌞 SUNNY BACKGROUND */
+        .sun {
+            background: linear-gradient(120deg, #f6d365, #fda085);
+        }
+
+        /* 🌧 RAIN BACKGROUND */
+        .rain {
+            background: linear-gradient(120deg, #4b79a1, #283e51);
+        }
+
+        /* GLASS CARD */
+        .card {
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            width: 850px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        /* GRID FORM */
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            grid-column: span 2;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: #00c6ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0072ff;
+        }
+
+        /* RESULT */
+        .result {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* 🌧 RAIN ANIMATION */
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: white;
+            animation: fall 0.5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* ☀ SUN GLOW */
+        .sun-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
+            border-radius: 50%;
+            top: 10%;
+            right: 10%;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+
+<body class="{% if prediction == 1 %}rain{% elif prediction == 0 %}sun{% endif %}">
+
+    <!-- ☀ Sun effect -->
+    {% if prediction == 0 %}
+        <div class="sun-glow"></div>
+    {% endif %}
+
+    <!-- 🌧 Rain effect -->
+    {% if prediction == 1 %}
+        {% for i in range(50) %}
+            <div class="rain-drop" style="left: {{ i*2 }}%; animation-delay: {{ i*0.05 }}s;"></div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="card">
+
+        <h2>🌦 AI Weather Predictor</h2>
+
+        <form action="/predict" method="POST">
+
+            <input name="MinTemp" placeholder="MinTemp">
+            <input name="MaxTemp" placeholder="MaxTemp">
+
+            <input name="Rainfall" placeholder="Rainfall">
+            <input name="Evaporation" placeholder="Evaporation">
+
+            <input name="Sunshine" placeholder="Sunshine">
+            <input name="WindGustSpeed" placeholder="WindGustSpeed">
+
+            <input name="WindSpeed9am" placeholder="WindSpeed9am">
+            <input name="WindSpeed3pm" placeholder="WindSpeed3pm">
+
+            <input name="Humidity9am" placeholder="Humidity9am">
+            <input name="Humidity3pm" placeholder="Humidity3pm">
+
+            <input name="Pressure9am" placeholder="Pressure9am">
+            <input name="Pressure3pm" placeholder="Pressure3pm">
+
+            <input name="Cloud9am" placeholder="Cloud9am">
+            <input name="Cloud3pm" placeholder="Cloud3pm">
+
+            <input name="Temp9am" placeholder="Temp9am">
+            <input name="Temp3pm" placeholder="Temp3pm">
+
+            <input name="RainToday" placeholder="RainToday (0/1)">
+            <input name="Year" placeholder="Year">
+
+            <input name="Month" placeholder="Month">
+            <input name="Day" placeholder="Day">
+
+            <button type="submit">Predict Weather</button>
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                {% if prediction == 1 %}
+                    🌧 Rain Expected Tomorrow
+                {% else %}
+                    ☀ Clear & Sunny Tomorrow
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
