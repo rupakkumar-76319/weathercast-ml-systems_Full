@@ -124,9 +124,9 @@ weathercast-ml-system-full/
 │   └── weatherSystem.ipynb      
 │
 ├── 📁 screenshots/
-│   ├── homepage.png
-│   ├── prediction_result_not_rain.png
-│   └── prediction_result_rain.png    
+│   ├── ![Homepage](screenshots/homepage.png)
+│   ├── ![Prediction](screenshots/prediction_result_not_rain.png)
+│   └── ![Prediction](screenshots/prediction_result_rain.png)  
 │
 ├── 📁 src/
 │    ├── __init__.py
@@ -137,7 +137,6 @@ weathercast-ml-system-full/
 │    ├── preprocess.py
 │    ├── split.py
 │    ├── train.py
-│    ├── evaluate.py
 │    └── utlis.py
 │
 │   
@@ -155,7 +154,7 @@ pip install -r requirements.txt
 python app/app.py
 
 Then Open
-http://127.0.0.1:5000
+"http://127.0.0.1:5000"
 
 $Future Improvements
 ---- Use weather forecast API instead of current data
@@ -171,7 +170,7 @@ $Key Learnings
 ---- Building full ML system (not just model)
 
 ## 🌐 Live Demo
-https://weathercast-ml-systems.onrender.com
+"https://weathercast-ml-systems.onrender.com"
 
 
 
